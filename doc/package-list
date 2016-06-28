@@ -1,8 +1,0 @@
-matrix.adapterDistribution
-matrix.adapterDistribution.impl.JPPF
-matrix.adapterDistribution.tasks
-matrix.distributionPolicy
-matrix.factory
-matrix.matrixComp
-matrix.matrixImpl
-matrix.reconstructionStrategy
