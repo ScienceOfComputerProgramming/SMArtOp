@@ -15,6 +15,11 @@
  */
 package matrix.factory;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import matrix.matrixImpl.Matrix;
 import matrix.matrixImpl.MatrixSparse;
 import matrix.matrixImpl.Terna;
@@ -48,5 +53,32 @@ public class FactoryMatrixSparse implements FactoryMatrix {
 		for(int i=0;i<rowSize;i++)
 			identity.setValue(i, i, 1);
 		return identity;
+	}
+	
+	@Override
+	public Matrix createMatrix(String pathToCopy) {
+		
+		BufferedReader io;
+		Matrix loaded = null;
+		try {
+			io = new BufferedReader(new InputStreamReader(new FileInputStream(pathToCopy)));
+			String l = io.readLine();
+			String [] sizes = l.split(",");
+			loaded = new MatrixSparse(Integer.parseInt(sizes[0]),Integer.parseInt(sizes[1]));
+			l = io.readLine();
+			int i = 0;
+			while(l!=null){
+				String [] row = l.split(",");
+				for(int j=0;j<row.length;j++)
+					loaded.setValue(i, j, Float.parseFloat(row[j]));
+				l = io.readLine();
+				i++;
+			}
+			io.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return loaded;
 	}
 }

@@ -37,7 +37,7 @@ public class RowMatrixReconstructionStrategy implements MatrixReconstructionStra
 	public void buildMatrix(Matrix res, Matrix taskResult) {
 			Collection<Integer> filas=taskResult.getRows();
 			for (int k:filas){
-				System.out.println(k);
+//				System.out.println(k);
 				res.setRow(k, taskResult);
 			}
 	

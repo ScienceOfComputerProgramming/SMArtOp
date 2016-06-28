@@ -15,6 +15,10 @@
  */
 package matrix.matrixImpl;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -194,6 +198,7 @@ public abstract class Matrix implements Serializable {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
+		sb.append("Size: "+rowSize()+" x "+columnSize()+"\n");
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++)
 				sb.append(this.getValue(i, j) + " ");
@@ -301,6 +306,30 @@ public abstract class Matrix implements Serializable {
 		return submatrix;
 	}
 
+	/**
+	 * Saves the matrix to disk in a CSV format. The first line contains the size 
+	 * of the matrix. Then, the remaining lines stores the content of each row of the
+	 * matrix in a dense format. 
+	 * @param path path where to store the CSV representation of the matrix
+	 */
+	public void saveToCSV(String path){
+		try{
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, false), "UTF8"));
+		out.write(rows+","+columns+"\n");
+		for(int i=0;i<rows;i++){
+			StringBuilder sb = new StringBuilder();
+			for(int j=0;j<columns;j++)
+				sb.append(getValue(i, j)+",");
+			sb.substring(0,sb.length()-1);
+			sb.append("\r\n");
+			out.write(sb.toString());
+		}
+		out.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	/** Analyses whether the matrix is square, i.e. the number of rows is equal to the number of columns
 	 * @return true if the matrix is square
 	 */
@@ -330,7 +359,7 @@ public abstract class Matrix implements Serializable {
 	
 	/**
 	 * @param LU A*X = B
-	 * @param B ??
+	 * @param B Result matrix
 	 * @param piv pivot array
 	 */
 	public abstract void findFastSolution(Matrix LU,Matrix B,int [] piv);

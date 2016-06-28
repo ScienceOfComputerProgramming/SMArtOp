@@ -6,3 +6,6 @@ matrix.factory
 matrix.matrixComp
 matrix.matrixImpl
 matrix.reconstructionStrategy
+test.featureSelection
+test.matrixCreation
+test.operation

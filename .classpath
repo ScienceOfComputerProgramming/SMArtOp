@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/jppf-server.jar"/>
 	<classpathentry kind="lib" path="lib/jppf-client.jar"/>
 	<classpathentry kind="lib" path="lib/jppf-common-node.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -96,41 +96,42 @@ public abstract class TangSelection {
 
 		Matrix B = computeB(data);
 
-		Matrix Dw = FactoryMatrixHolder.getFactory().createMatrix(B.rowSize(), B.columnSize());
-		setIdentity(Dw);
+		
+//		Matrix Dw = FactoryMatrixHolder.getFactory().createMatrix(B.rowSize(), B.columnSize());
+//		setIdentity(Dw);
+//
+//		Matrix E = computeE(data);
+//
+//		Matrix Wt = FactoryMatrixHolder.getFactory().createMatrix(B.rowSize(), E.columnSize());
+//
+//		Wt.setValue(0, 0, 1000);
+//
+//		Matrix Wt1 = null;
+//
+//		boolean convergencia = false;
+//
+//		int i = 0; 
+//
+//		while (!convergencia && i< max_iterations ) {
+//
+//			Configuration.logger.info(new Date() + " Iteration Number: " + i + " "+ System.currentTimeMillis());
+//
+//			Configuration.logger.info("Starts Wt1 " + new Date() + " "+ System.currentTimeMillis());
+//			Wt1 = computeWt1(B, Dw, E);
+//			Configuration.logger.info("Finishes Wt1 " + new Date() + " "+ System.currentTimeMillis());
+//
+//			Configuration.logger.info("Starts Update Dw " + new Date() + " "+ System.currentTimeMillis());
+//			updateDw(Wt1, Dw);
+//			Configuration.logger.info("Finishes Update Dw " + new Date() + " "+ System.currentTimeMillis());
+//
+//			convergencia = converge(Wt, Wt1);
+//			copy(Wt, Wt1);
+//
+//			i++;
+//		}
 
-		Matrix E = computeE(data);
-
-		Matrix Wt = FactoryMatrixHolder.getFactory().createMatrix(B.rowSize(), E.columnSize());
-
-		Wt.setValue(0, 0, 1000);
-
-		Matrix Wt1 = null;
-
-		boolean convergencia = false;
-
-		int i = 0; 
-
-		while (!convergencia && i< max_iterations ) {
-
-			Configuration.logger.info(new Date() + " Iteration Number: " + i + " "+ System.currentTimeMillis());
-
-			Configuration.logger.info("Starts Wt1 " + new Date() + " "+ System.currentTimeMillis());
-			Wt1 = computeWt1(B, Dw, E);
-			Configuration.logger.info("Finishes Wt1 " + new Date() + " "+ System.currentTimeMillis());
-
-			Configuration.logger.info("Starts Update Dw " + new Date() + " "+ System.currentTimeMillis());
-			updateDw(Wt1, Dw);
-			Configuration.logger.info("Finishes Update Dw " + new Date() + " "+ System.currentTimeMillis());
-
-			convergencia = converge(Wt, Wt1);
-			copy(Wt, Wt1);
-
-			i++;
-		}
-
-		return new ArrayList<Integer>(sortFeatures(Wt1, K).subList(0, K));
-
+//		return new ArrayList<Integer>(sortFeatures(Wt1, K).subList(0, K));
+		return new ArrayList<Integer>();
 	}
 
 	private List<Integer> sortFeatures(Matrix wt1, int K) {

@@ -15,6 +15,7 @@
  */
 package test.operation;
 
+import matrix.adapterDistribution.Configuration;
 import matrix.factory.FactoryMatrixHolder;
 import matrix.factory.FactoryMatrixSparseHash;
 import matrix.factory.FactoryMatrixTrovePar;
@@ -34,7 +35,7 @@ public class TestMultiplication {
 	 * @param args no parameters are needed
 	 */
 	public static void main(String[] args) {
-		
+			
 		//setting of the matrix holder
 		FactoryMatrixHolder.setFactory(new FactoryMatrixSparseHash());
 		
@@ -50,6 +51,8 @@ public class TestMultiplication {
 		A.setValue(2, 1, 8);
 		A.setValue(2, 2, 9);
 		
+		System.out.println(A);
+		
 		Matrix B = FactoryMatrixHolder.getFactory().createMatrix(3, 3);
 		
 		B.setValue(0, 0, 11);
@@ -64,8 +67,12 @@ public class TestMultiplication {
 		
 		MatrixComputation algebraFD = new MatrixComputationFD();
 		
-		System.out.println(algebraFD.multiply(A, B));
-				
+		Matrix C = algebraFD.multiply(A, B);
+		
+		System.out.println(C);
+		
+		System.exit(0);
+		
 		//Changing the matrix factory
 		FactoryMatrixHolder.setFactory(new FactoryMatrixTrovePar());
 		
@@ -76,7 +83,7 @@ public class TestMultiplication {
 		
 		//Changing the matrix computation
 		MatrixComputation algebraPar = new MatrixComputationSparsePar();
-
+		Configuration.MAX_THREADS = 4;
 		System.out.println(algebraPar.multiply(Acopy, Bcopy));
 	}
 }

@@ -41,6 +41,12 @@ public interface FactoryMatrix extends Serializable{
 	 */
 	public Matrix createMatrix(Matrix toCopy);
 	
+	/** 
+	 * Creates a Matrix by loading the Matrix from a file
+	 * @param pathToCopy path to the file containing the Matrix
+	 * @return the created matrix
+	 */
+	public Matrix createMatrix(String pathToCopy);
 	
 	/**
 	 * Creates an Identity Matrix of rowSize x rowSize
