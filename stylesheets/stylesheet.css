@@ -342,7 +342,7 @@ Full-Width Styles
   height:70px;
   text-indent: -5000px;
   overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom left;
+  background: url(../images/sprite_javadoc.png) no-repeat bottom;
 }
 
 .zip_download_link {
@@ -374,7 +374,7 @@ Full-Width Styles
 }
 
 .javadoc_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top left;
+  background: url(../images/sprite_javadoc.png) no-repeat top;
 }
 
 .docu_link:hover {
