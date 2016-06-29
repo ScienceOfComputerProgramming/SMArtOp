@@ -332,7 +332,7 @@ Full-Width Styles
   height:70px;
   text-indent: -5000px;
   overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom right;
+  background: url(../images/sprite_wiki.png) no-repeat bottom right;
 }
 
 .javadoc_link {
@@ -378,7 +378,7 @@ Full-Width Styles
 }
 
 .docu_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top right;
+  background: url(../images/sprite_wiki.png) no-repeat top right;
 }
 
 #main_content_wrap {
