@@ -6,7 +6,12 @@ Copyright 2016 - ISISTAN - UNICEN - CONICET
 
 SMArtOp is a Java library for dividing the processing of large-scale sparse-matrix arithmetic operations on distributed environments.The software is designed for dividing and balancing the processing of large-scale sparse-matrix arithmetic operations into simpler and independent tasks to be executed in a distributed environment.
 
+A description of the software's architecture, supported matrix representations, supported matrix operations, code examples, and a performance evaluation can be found in the project's [Wiki](https://github.com/tommantonela/SMArtOp/wiki)
+
 This software was used in:
+
+A. Tommasel, D. Godoy, A. Zunino, and C. Mateos. A Distributed Approach for Accelerating Sparse-matrix Arithmetic Operations for High-dimensional Feature Selection [DOI: 10.1007/s10115-016-0981-5](http://dx.doi.org/10.1007/s10115-016-0981-5).  Knowledge and Information Systems, 1-39. 2016
+
 A. Tommasel, C. Mateos, D. Godoy, and A. Zunino. Sparse-matrix arithmetic operations in computer clusters: A text feature selection application. In Proceedings of the 2nd IEEE ARGENCON, pages 458–463, June 2014. [DOI: 10.1109/ARGENCON.2014.6868535](http://dx.doi.org/10.1109/ARGENCON.2014.6868535)
 
 === Dependencies ===
