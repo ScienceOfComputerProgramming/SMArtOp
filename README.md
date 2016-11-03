@@ -26,7 +26,7 @@ SMArtOp depends of two libraries:
 
 Usage examples are included in the software distribution in the package test. Two alternative examples of use are provided. First, a stand-alone example in which two matrices are created and then multiplied. Second, an example in which the software is used in the context of a feature selection example. An example of the configuration file needed for executing the feature selection application is provided.
 
-Additionally, a description of the software's architecture, supported matrix representations, supported matrix operations, code examples, and a performance evaluation can be found in the project's [Wiki](https://github.com/tommantonela/SMArtOp/wiki)
+Additionally, a description of the software's architecture, supported matrix representations, supported matrix operations, code examples, and a performance evaluation can be found in the project's [Wiki](https://github.com/tommantonela/SMArtOp/wiki).
 
 
 === Data ===
