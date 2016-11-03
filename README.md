@@ -10,7 +10,7 @@ A description of the software's architecture, supported matrix representations, 
 
 This software was used in:
 
-A. Tommasel, D. Godoy, A. Zunino, and C. Mateos. A Distributed Approach for Accelerating Sparse-matrix Arithmetic Operations for High-dimensional Feature Selection [DOI: 10.1007/s10115-016-0981-5](http://dx.doi.org/10.1007/s10115-016-0981-5).  Knowledge and Information Systems, 1-39. 2016
+A. Tommasel, D. Godoy, A. Zunino, and C. Mateos. A Distributed Approach for Accelerating Sparse-matrix Arithmetic Operations for High-dimensional Feature Selection. Knowledge and Information Systems, pages 1-39, 2016. [DOI: 10.1007/s10115-016-0981-5](http://dx.doi.org/10.1007/s10115-016-0981-5).  
 
 A. Tommasel, C. Mateos, D. Godoy, and A. Zunino. Sparse-matrix arithmetic operations in computer clusters: A text feature selection application. In Proceedings of the 2nd IEEE ARGENCON, pages 458–463, June 2014. [DOI: 10.1109/ARGENCON.2014.6868535](http://dx.doi.org/10.1109/ARGENCON.2014.6868535)
 
