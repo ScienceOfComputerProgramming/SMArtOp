@@ -330,6 +330,30 @@ public abstract class Matrix implements Serializable {
 		}
 	}
 	
+	/**
+	 * Saves the matrix to disk in a sparse CSV format. The first line contains the number of 
+	 * files, columns and non zero elements of the matrix. 
+	 * Then, the remaining lines stores the content of each non zero element with the format:
+	 * row,column,value
+	 * @param path path where to store the CSV representation of the matrix
+	 */
+	public void saveToSparseCSV(String path){
+		try{
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, false), "UTF8"));
+		out.write(rows+","+columns+","+nonZeros+"\n");
+		for(int i=0;i<rows;i++){
+			for(int j=0;j<columns;j++){
+				float v = getValue(i, j);
+				if(v!=0)
+					out.write(i+","+j+","+v+"\r\n");
+			}			
+		}
+		out.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	/** Analyses whether the matrix is square, i.e. the number of rows is equal to the number of columns
 	 * @return true if the matrix is square
 	 */

@@ -10,4 +10,10 @@
 	<classpathentry kind="lib" path="lib/jppf-common-node.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+        <attributes>
+            <attribute name="maven.pomderived" value="true"/>
+            <attribute name="org.eclipse.jst.component.nondependency" value=""/>
+        </attributes>
+</classpathentry> 
 </classpath>

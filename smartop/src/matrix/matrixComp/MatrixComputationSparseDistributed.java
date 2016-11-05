@@ -96,7 +96,7 @@ public class MatrixComputationSparseDistributed extends MatrixComputationSparse 
 				
 				ITask task = new AddRowTask(startRow, endRow, m.getSubmatrix(startRow, endRow), m1.getSubmatrix(startRow, endRow));
 				tasks.add(task);
-				System.out.println("Creating add task for: [" + startRow + "," + endRow + "]");
+				Configuration.logger.log(Level.INFO,"Creating add task for: [" + startRow + "," + endRow + "]");
 			}
 			
 			adapter.createJob(tasks.size(),result,new RowMatrixReconstructionStrategy());
@@ -145,7 +145,8 @@ public class MatrixComputationSparseDistributed extends MatrixComputationSparse 
 				
 				ITask task = new SubtractRowTask(startRow, endRow, m.getSubmatrix(startRow, endRow), m1.getSubmatrix(startRow, endRow));
 				tasks.add(task);
-				System.out.println("Creating subtract task for: [" + startRow + "," + endRow + "]");
+				Configuration.logger.log(Level.INFO,"Creating subtract task for: [" + startRow + "," + endRow + "]");
+				
 			}
 			
 			adapter.createJob(tasks.size(),result,new RowMatrixReconstructionStrategy());
@@ -250,7 +251,7 @@ public class MatrixComputationSparseDistributed extends MatrixComputationSparse 
 		
 		try {
 			
-			Configuration.logger.log(Level.INFO,Configuration.getLogString("multiply-distributed", A, null, PARALLEL_FACTOR));
+			Configuration.logger.log(Level.INFO,Configuration.getLogString("laplacian-distributed", A, null, PARALLEL_FACTOR));
 			
 			dp.putValue(LAPLACIAN_MATRIX, A);
 			dp.putValue(FACTORY, FactoryMatrixHolder.getFactory());
@@ -273,7 +274,8 @@ public class MatrixComputationSparseDistributed extends MatrixComputationSparse 
 				
 				tasks.add(task);
 				
-				System.out.println("Creating laplacian task for: [" + startRow + "," + endRow + "]");
+				Configuration.logger.log(Level.INFO,"Creating laplacian task for: [" + startRow + "," + endRow + "]");
+				
 			}
 			
 			adapter.createJob(tasks.size(),Da,new LaplacianMatrixReconstructionStrategy());

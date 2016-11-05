@@ -15,11 +15,14 @@
  */
 package test.operation;
 
+import java.util.logging.Level;
+
 import matrix.adapterDistribution.Configuration;
 import matrix.adapterDistribution.impl.JPPF.AdapterDistributionJPPFImp;
 import matrix.distributionPolicy.TaskSplitPolicyMode;
 import matrix.factory.FactoryMatrixHolder;
 import matrix.factory.FactoryMatrixSparseHash;
+import matrix.factory.FactoryMatrixSparseHashPar;
 import matrix.factory.FactoryMatrixTrovePar;
 import matrix.matrixComp.MatrixComputation;
 import matrix.matrixComp.MatrixComputationFD;
@@ -40,11 +43,13 @@ public class TestMultiplicationDistributed {
 	public static void main(String[] args) {
 			
 		//setting of the matrix holder
-		FactoryMatrixHolder.setFactory(new FactoryMatrixTrovePar());
+		FactoryMatrixHolder.setFactory(new FactoryMatrixSparseHashPar());
 		
-		Matrix A = FactoryMatrixHolder.getFactory().createMatrix("matrixA.csv");
+		Configuration.logger.setLevel(Level.INFO);
 		
-		Matrix B = FactoryMatrixHolder.getFactory().createMatrix("matrixB.csv");
+		Matrix A = FactoryMatrixHolder.getFactory().createMatrix("example-data/matrixA.csv");
+		
+		Matrix B = FactoryMatrixHolder.getFactory().createMatrix("example-data/matrixB.csv");
 		
 		MatrixComputation algebraJPPF = new MatrixComputationSparseDistributed(new AdapterDistributionJPPFImp());
 		
@@ -54,7 +59,12 @@ public class TestMultiplicationDistributed {
 		
 		Matrix C = algebraJPPF.multiply(A, B);
 		
-//		System.out.println(C);
+		System.out.println(C);
+		
+		MatrixComputation algebra = new MatrixComputationFD();
+		C = algebra.multiply(A, B);
+		
+		System.out.println(C);
 		
 	}
 	

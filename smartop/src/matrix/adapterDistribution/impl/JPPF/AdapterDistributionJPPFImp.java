@@ -1,24 +1,8 @@
-/* 
- *  Copyright 2016 ISISTAN - UNICEN - CONICET
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package matrix.adapterDistribution.impl.JPPF;
 
 import java.util.List;
 
 import matrix.adapterDistribution.AdapterDistribution;
-import matrix.adapterDistribution.AsynchronousTaskResultListener;
 import matrix.adapterDistribution.Configuration;
 import matrix.adapterDistribution.IDataShared;
 import matrix.adapterDistribution.ITask;
@@ -28,8 +12,9 @@ import matrix.reconstructionStrategy.MatrixReconstructionStrategy;
 import org.jppf.JPPFException;
 import org.jppf.client.JPPFClient;
 import org.jppf.client.JPPFJob;
-import org.jppf.server.protocol.JPPFJobSLA;
-import org.jppf.task.storage.MemoryMapDataProvider;
+import org.jppf.node.protocol.JPPFJobSLA;
+import org.jppf.node.protocol.MemoryMapDataProvider;
+import org.jppf.node.protocol.Task;
 
 /**
  * Implements an adapter for JPPF
@@ -41,10 +26,13 @@ public class AdapterDistributionJPPFImp implements AdapterDistribution{
 	transient IDataShared datashared;
 
 	private JPPFJob job;
-	
+
 	static private JPPFClient client = null;
 	static private Object lock = new Object();
 	static private int counter = 0; //Reference counter for closing the connection when there are no more adapters
+
+	Matrix res;
+	MatrixReconstructionStrategy matrixReconstruction;
 	
 	/**
 	 * class constructor
@@ -61,11 +49,13 @@ public class AdapterDistributionJPPFImp implements AdapterDistribution{
 	@Override
 	public void createJob(int taskNumber, Matrix res,MatrixReconstructionStrategy matrixReconstructionStrategy) {
 
-		AsynchronousTaskResultListener listener = new AsynchronousTaskListenerJPPF(taskNumber,res,matrixReconstructionStrategy);
-		
-		job = new JPPFJob((AsynchronousTaskListenerJPPF)listener);
+		job = new JPPFJob();
 		job.setDataProvider(((DataSharedJPPFImp)datashared).getDataProvider());
+//		job.addJobListener((AsynchronousTaskListenerJPPF)listener);
 
+		this.res = res;
+		this.matrixReconstruction = matrixReconstructionStrategy; 
+		
 		if(Configuration.MAX_NODOS!=0){
 			JPPFJobSLA sla=new JPPFJobSLA();
 			sla.setMaxNodes(Configuration.MAX_NODOS);
@@ -76,21 +66,22 @@ public class AdapterDistributionJPPFImp implements AdapterDistribution{
 
 	@Override
 	public void addTask(ITask task) {
-		
+
 		TaskJPPF t = new TaskJPPF(task);
-		
+
 		try {
-			job.addTask(t);
+			job.add(t);
 		} catch (JPPFException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	@Override
 	public void submit() {
 		try {
-			client.submit(job);
+			client.submitJob(job);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,20 +95,26 @@ public class AdapterDistributionJPPFImp implements AdapterDistribution{
 
 	@Override
 	public void waitUntilComplete() {
-		((AsynchronousTaskResultListener) job.getResultListener()).waitUntilComplete();
+		List<Task<?>> tareas = job.awaitResults();
+		for(Task<?> jt:tareas){
+			Matrix taskResult=(Matrix)jt.getResult();
+			matrixReconstruction.buildMatrix(res, taskResult);
+		}
+			
+
 	}
 
 	@Override
 	public void addTasks(List<ITask> task) {
-		
+
 		try {
 			for(ITask t:task){
-				job.addTask(new TaskJPPF(t));
+				job.add(new TaskJPPF(t));
 			}
 		} catch (JPPFException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 
 	@Override
@@ -127,7 +124,7 @@ public class AdapterDistributionJPPFImp implements AdapterDistribution{
 			client.close();
 			client=null;
 		}
-			
+
 	}
-	
+
 }
